@@ -4,7 +4,9 @@ const colors = require("colors");
 const PORT = process.env.PORT;
 const goalRoutes = require("./routes/goalRoutes");
 const { errorHandler } = require("./middleware/errorMiddleware");
+const connectDB = require("./config/db");
 
+connectDB();
 const app = express();
 
 //handler middleware
