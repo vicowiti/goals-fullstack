@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const onLogout = () => {
     dispatch(logout());
-    dispatch(reset);
+    dispatch(reset());
     navigate("/");
   };
 
@@ -26,7 +26,7 @@ const Navbar = () => {
       <header className="flex items-center px-4">
         <FaClipboardList size={30} />
         <span className="text-4xl">
-          <Link to="/">Goals</Link>
+          <Link to="/dashboard">Goals</Link>
         </span>
       </header>
       <main className="px-6 flex items-center">
@@ -45,7 +45,7 @@ const Navbar = () => {
         ) : (
           <ul className="flex items-center">
             <li className="px-3">
-              <Link to="/login" className="flex items-center">
+              <Link to="/" className="flex items-center">
                 <FaSignInAlt />
                 <span>Login</span>
               </Link>
