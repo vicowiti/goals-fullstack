@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv").config();
 const colors = require("colors");
@@ -18,12 +19,21 @@ app.use(cors());
 app.use("/api/goals", goalRoutes);
 app.use("/api/users", userRoutes);
 
-app.use(errorHandler);
+// Serve frontend
 
-//test endpoint
-app.get("/", (req, res) => {
-  res.status(200).json("Up and running");
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../../", "frontend", "dist", "index.html")
+    )
+  );
+} else {
+  app.get("/", (req, res) => res.send("set to production"));
+}
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port: ${PORT}`.bgMagenta);
